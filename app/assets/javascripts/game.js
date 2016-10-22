@@ -4,7 +4,10 @@ $(document).ready(function() {
     var avatarUrl = 'https://avatars.io/twitter/' + data.twitter;
     // TODO: why is this firing twice?
     if($('#' + data.twitter).length === 0) {
-      $('#grid .row').append('<div class="col-xs-3"><img id="'+ data.twitter + '" class="img-rounded img-responsive" src="' + avatarUrl + '"/></div>');
+      $('#grid .row').append('<div class="col-xs-3">' +
+          '<img id="'+ data.twitter + '" class="img-rounded img-responsive" src="' + avatarUrl + '"/>' +
+          '<p class="text-warning emotion-result">???</p>' +
+        '</div>');
     }
   });
 
@@ -14,6 +17,7 @@ $(document).ready(function() {
       var twitter = data.twitter;
       var imgUrl = data.url;
       $('#' + twitter).attr('src', imgUrl);
+      $('#' + twitter).next().text('Happiness: ' + data.happiness);
     }
   });
 });
