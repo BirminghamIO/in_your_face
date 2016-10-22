@@ -4,7 +4,8 @@ class Entry < ApplicationRecord
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
   before_save :normalize_twitter_handle
-  before_save :decode_base64_image
+  before_create :decode_base64_image
+  after_create :process_entry
 
   def normalize_twitter_handle
     self.twitter = self.twitter.gsub('@', '')
@@ -24,5 +25,9 @@ class Entry < ApplicationRecord
 
       self.image = data
     end
+  end
+
+  def process_entry
+    ProcessEntryJob.perform_later self.id
   end
 end
