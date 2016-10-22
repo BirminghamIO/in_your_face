@@ -42,15 +42,15 @@ class Entry < ApplicationRecord
     {
         success:   true,
         twitter:   self.twitter,
-        url:       self.photo.url,
-        anger:     self.emotion.first['scores']['anger'],
-        contempt:  self.emotion.first['scores']['contempt'],
-        disgust:   self.emotion.first['scores']['disgust'],
-        fear:      self.emotion.first['scores']['fear'],
-        happiness: self.emotion.first['scores']['happiness'],
-        neutral:   self.emotion.first['scores']['neutral'],
-        sadness:   self.emotion.first['scores']['sadness'],
-        surprise:  self.emotion.first['scores']['surprise'],
+        url:       self.photo.url(:medium),
+        anger:     self.format_score('anger'),
+        contempt:  self.format_score('contempt'),
+        disgust:   self.format_score('disgust'),
+        fear:      self.format_score('fear'),
+        happiness: self.format_score('happiness'),
+        neutral:   self.format_score('neutral'),
+        sadness:   self.format_score('sadness'),
+        surprise:  self.format_score('surprise'),
     }
   end
 
@@ -60,5 +60,9 @@ class Entry < ApplicationRecord
         twitter: self.twitter,
         url:     self.photo.url,
     }
+  end
+
+  def format_score(emotion)
+    (self.emotion.first['scores'][emotion].round(5) * 100).round(2)
   end
 end
