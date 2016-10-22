@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
+gem "appsignal"
 gem "autoprefixer-rails"
 gem "aws-sdk", "~> 2.3"
 gem "delayed_job_active_record"
