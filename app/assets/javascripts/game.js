@@ -6,7 +6,7 @@ $(document).ready(function() {
     if($('#' + data.twitter).length === 0) {
       $('#grid .row').append('<div class="col-xs-3">' +
           '<img id="'+ data.twitter + '" class="img-rounded img-responsive" src="' + avatarUrl + '"/>' +
-          '<p class="text-warning emotion-result">???</p>' +
+          '<p class="text-warning emotion-result"><b>'+ data.twitter +'</b></p>' +
         '</div>');
     }
   });
@@ -17,7 +17,7 @@ $(document).ready(function() {
       var twitter = data.twitter;
       var imgUrl = data.url;
       $('#' + twitter).attr('src', imgUrl);
-      $('#' + twitter).next().text('Happiness: ' + data.happiness);
+      $('#' + twitter).next().text('<b>' + data.twitter +' Happiness: ' + data.happiness + '</b>');
     }
   });
 });
