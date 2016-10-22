@@ -55,9 +55,9 @@ $(document).ready(function() {
 
       photo.setAttribute('src', data);
       $('#video').hide();
-      $('#capture-btn').hide();
+      $('#capture-btn').attr('disabled', true);
       $('#photo').show();
-      $('#form').show();
+      $('#form').submit();
     });
 
     // Submit the screenshot
@@ -73,7 +73,18 @@ $(document).ready(function() {
         method: 'POST',
         url: '/entries',
         contentType: 'application/json',
-        data: JSON.stringify(payload)
+        data: JSON.stringify(payload),
+        success: function() {
+          $('#emotion').hide();
+          $('#success-alert').show();
+          $('#photo').hide();
+          $('#video').show();
+          $('#capture-btn').attr('disabled', false);
+        },
+        error: function() {
+          $('#emotion').hide();
+          $('#error-alert').show();
+        }
       });
       event.stopImmediatePropagation();
       event.preventDefault();

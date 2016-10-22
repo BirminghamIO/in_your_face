@@ -10,14 +10,19 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     </head>
     <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <p class="navbar-text"><b>In Your Face!</b></a>
+        </nav>
         <main class="container">
+          <div id="emotion" class="alert alert-warning">Give me emotion!</div>
+          <div id="success-alert" class="alert alert-success" style="display: none">Sent!</div>
+          <div id="error-alert" class="alert alert-danger" style="display: none">Oopsy, try again!</div>
           <video id="video" autoplay></video>
           <img id="photo" alt="face" style="display: none;"/>
           <canvas id="canvas" style="display: none"></canvas>
-          <button id="capture-btn" type="submit" class="btn btn-default btn-lg btn-block">Capture me!</button>
-          <form id="form" action="/entries" method="post" style="display: none;">
+          <form id="form" action="/entries" method="post">
             <input type="text" id="twtter-handle" placeholder="Twitter handle">
-            <button type="submit" id="submit" class="btn btn-default btn-lg btn-block">Face off!</button>
+            <button id="capture-btn" type="submit" class="btn btn-default btn-lg btn-block">Face off!</button>
           </form>
         </main>
 

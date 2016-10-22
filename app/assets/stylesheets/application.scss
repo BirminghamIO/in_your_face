@@ -9,11 +9,28 @@
 @import "refills/flashes";
 
 body {
-    padding: 20px;
+    padding-top: 45px;
 }
 
-video, img {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 20px;
+nav {
+    text-align: center;
+}
+
+main.container {
+    padding: 20px;
+    video, img {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    video {
+        max-height: 360px;
+    }
+}
+
+.navbar-text {
+    text-transform: uppercase;
+}
+
+.alert {
+    text-align: center;
 }
