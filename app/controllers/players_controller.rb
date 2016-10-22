@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   def create
     handle = player_params[:twitter].gsub('@', '')
     Pusher.trigger('entries', 'player_joined', {
-        twitter: handle
+      twitter: handle
     })
   end
 
