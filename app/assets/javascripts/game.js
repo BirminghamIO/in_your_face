@@ -17,7 +17,7 @@ $(document).ready(function() {
       var twitter = data.twitter;
       var imgUrl = data.url;
       $('#' + twitter).attr('src', imgUrl);
-      $('#' + twitter).next().text('<b>' + data.twitter +' Happiness: ' + data.happiness + '</b>');
+      $('#' + twitter).next().html('<b>' + data.twitter +' Happiness: ' + data.happiness + '</b>');
     }
   });
 });
