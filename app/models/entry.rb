@@ -3,6 +3,8 @@ class Entry < ApplicationRecord
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
+  serialize :emotion
+
   before_save :normalize_twitter_handle
   before_create :decode_base64_image
   after_create :process_entry
@@ -32,21 +34,31 @@ class Entry < ApplicationRecord
   end
 
   def push_emotion
-    Pusher.trigger('entries', 'emotion_ready', {
-        twitter:   self.twitter,
-        url:       self.photo.url,
-        anger:     0.00011789846,
-        contempt:  0.0000228391418,
-        disgust:   0.0180042554,
-        fear:      4.828176e-7,
-        happiness: 0.9683092,
-        neutral:   0.0117861256,
-        sadness:   0.000459061179,
-        surprise:  0.00130010839
-    })
+    Pusher.trigger('entries', 'emotion_ready', self.format_push_data)
   end
 
-  def format_emotion
+  def format_push_data
+    return self.fail_data unless self.emotion.try(:first)['scores']
+    {
+        success:   true,
+        twitter:   self.twitter,
+        url:       self.photo.url,
+        anger:     self.emotion.first['scores']['anger'],
+        contempt:  self.emotion.first['scores']['contempt'],
+        disgust:   self.emotion.first['scores']['disgust'],
+        fear:      self.emotion.first['scores']['fear'],
+        happiness: self.emotion.first['scores']['happiness'],
+        neutral:   self.emotion.first['scores']['neutral'],
+        sadness:   self.emotion.first['scores']['sadness'],
+        surprise:  self.emotion.first['scores']['surprise'],
+    }
+  end
 
+  def fail_data
+    {
+        success: false,
+        twitter: self.twitter,
+        url:     self.photo.url,
+    }
   end
 end

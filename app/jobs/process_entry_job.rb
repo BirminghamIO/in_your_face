@@ -3,7 +3,7 @@ class ProcessEntryJob < ApplicationJob
 
   def perform(id)
     entry = Entry.find id
-    entry.update!({ emotion: GetPhotoEmotion.call(entry.photo.url).to_s })
+    entry.update!({ emotion: GetPhotoEmotion.call(entry.photo.url) })
     entry.push_emotion
   end
 end

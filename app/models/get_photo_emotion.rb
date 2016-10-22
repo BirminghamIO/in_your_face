@@ -18,6 +18,6 @@ class GetPhotoEmotion
       http.request(request)
     end
 
-    response.body
+    JSON.parse response.body
   end
 end
