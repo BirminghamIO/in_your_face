@@ -7,4 +7,13 @@ $(document).ready(function() {
       $('#grid .row').append('<div class="col-xs-3"><img id="'+ data.twitter + '" class="img-rounded img-responsive" src="' + avatarUrl + '"/></div>');
     }
   });
+
+  channel.bind('emotion_ready', function(data) {
+    console.log(data);
+    if(data.success === true) {
+      var twitter = data.twitter;
+      var imgUrl = data.url;
+      $('#' + twitter).attr('src', imgUrl);
+    }
+  });
 });
