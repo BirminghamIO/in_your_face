@@ -1,5 +1,9 @@
 $(document).ready(function() {
   if (Modernizr.getusermedia) {
+
+    // Subscribe to the entries channel
+    var channel = pusher.subscribe('entries');
+
     // Configure user media
     var gumPromise = navigator.mediaDevices.getUserMedia({
       video: {
@@ -22,6 +26,27 @@ $(document).ready(function() {
       };
     }).catch(function(err) {
       alert(err);
+    });
+
+    // Enter the player using their twitter handle when we get it
+    $('#twitter-btn').click(function(event) {
+      // Tell the server who is joining
+      var payload = {
+        player: {
+          twitter: $('#twtter-handle').val()
+        }
+      };
+      $.ajax({
+        method: 'POST',
+        url: '/players',
+        contentType: 'application/json',
+        data: JSON.stringify(payload),
+        success: function() {
+          $('#capture-btn').attr('disabled', false);
+        }
+      });
+      event.stopImmediatePropagation();
+      event.preventDefault();
     });
 
     // Capture the screenshot
@@ -69,6 +94,7 @@ $(document).ready(function() {
         error: function () {
           $('#emotion').hide();
           $('#error-alert').show();
+          $('#capture-btn').attr('disabled', false);
         }
       });
     };
