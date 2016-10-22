@@ -69,6 +69,7 @@ $(document).ready(function() {
         error: function () {
           $('#emotion').hide();
           $('#error-alert').show();
+          $('#capture-btn').attr('disabled', false);
         }
       });
     };
