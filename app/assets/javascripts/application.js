@@ -42,7 +42,7 @@ $(document).ready(function() {
     });
 
     // Capture the screenshot
-    $('#capture-btn').click(function() {
+    $('#capture-btn').click(function(event) {
       var video = document.getElementById('video');
       var canvas = document.getElementById('canvas');
       var photo = document.getElementById('photo');
@@ -57,11 +57,13 @@ $(document).ready(function() {
       $('#video').hide();
       $('#capture-btn').attr('disabled', true);
       $('#photo').show();
-      $('#form').submit();
+      performPost();
+      event.stopImmediatePropagation();
+      event.preventDefault();
     });
 
     // Submit the screenshot
-    $('#form').submit(function(event) {
+    var performPost = function(event) {
       var photo = document.getElementById('photo');
       var payload = {
         entry: {
@@ -74,21 +76,19 @@ $(document).ready(function() {
         url: '/entries',
         contentType: 'application/json',
         data: JSON.stringify(payload),
-        success: function() {
+        success: function () {
           $('#emotion').hide();
           $('#success-alert').show();
           $('#photo').hide();
           $('#video').show();
           $('#capture-btn').attr('disabled', false);
         },
-        error: function() {
+        error: function () {
           $('#emotion').hide();
           $('#error-alert').show();
         }
       });
-      event.stopImmediatePropagation();
-      event.preventDefault();
-    });
+    };
 
   } else {
     alert('Sorry, you need modern web browser to play this game. I hear edge is OK');
