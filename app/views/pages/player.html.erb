@@ -20,9 +20,16 @@
           <video id="video" autoplay></video>
           <img id="photo" alt="face" style="display: none;"/>
           <canvas id="canvas" style="display: none"></canvas>
+          <div class="row">
+            <div class="col-xs-8">
+              <input type="text" id="twtter-handle" placeholder="Twitter handle">
+            </div>
+            <div class="col-xs-4">
+              <button id="twitter-btn" class="btn btn-info btn-block">Join</button>
+            </div>
+          </div>
           <form id="form" action="/entries" method="post">
-            <input type="text" id="twtter-handle" placeholder="Twitter handle">
-            <button id="capture-btn" type="submit" class="btn btn-default btn-lg btn-block">Face off!</button>
+            <button id="capture-btn" type="submit" class="btn btn-default btn-lg btn-block" disabled>Face off!</button>
           </form>
         </main>
 

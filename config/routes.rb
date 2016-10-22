@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get 'pages/game' => 'high_voltage/pages#show', id: 'game'
 
   resources :entries
+  resources :players
 end
