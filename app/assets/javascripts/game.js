@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var channel = pusher.subscribe('entries');
     channel.bind('player_joined', function (data) {
-        var avatarUrl = 'https://avatars.io/twitter/' + data.twitter;
+        var avatarUrl = 'https://twitter.com/' + data.twitter + '/profile_image?size=original';
         // TODO: why is this firing twice?
         if ($('#' + data.twitter).length === 0) {
-            $('#grid .row').append('<div class="col-xs-3">' +
+            $('#grid .row').append('<div class="col-xs-2">' +
                 '<img id="' + data.twitter + '" class="img-rounded img-responsive" src="' + avatarUrl + '"/>' +
                 '<p class="text-warning emotion-result"><b>' + data.twitter + '</b></p>' +
                 '</div>');
