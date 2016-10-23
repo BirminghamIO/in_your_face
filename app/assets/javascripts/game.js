@@ -21,7 +21,7 @@ $(document).ready(function () {
         }
     });
 
-    channel.bind('random_emotion_requested', function (data) {
+    channel.bind('random_emotion_requested', function () {
         var $options = $('#emotion_select').find('option'),
             random = ~~(Math.random() * $options.length);
 
@@ -47,6 +47,8 @@ $(document).ready(function () {
                     console.log(error);
                 }
             });
+
+            $('#game-emotion').text('Show us "' + $this.val() + '" in your face!');
         }
 
         event.stopImmediatePropagation();
