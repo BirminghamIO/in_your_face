@@ -4,8 +4,7 @@ $(document).ready(function() {
     // Subscribe to the entries channel
     var channel = pusher.subscribe('entries');
     channel.bind('emotion_wanted', function(data) {
-       // TODO: react to this
-      console.log(data.emotion);
+      $('#emotion').text('show us ' + data.emotion + ' in your face!');
     });
 
     var startVideo = function(video) {
@@ -106,14 +105,12 @@ $(document).ready(function() {
         contentType: 'application/json',
         data: JSON.stringify(payload),
         success: function () {
-          $('#emotion').hide();
           $('#success-alert').show();
           $('#photo').hide();
           $('#video').show();
           $('#capture-btn').attr('disabled', false);
         },
         error: function () {
-          $('#emotion').hide();
           $('#error-alert').show();
           $('#capture-btn').attr('disabled', false);
         }
