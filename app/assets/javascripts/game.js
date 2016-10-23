@@ -26,6 +26,7 @@ $(document).ready(function () {
             random = ~~(Math.random() * $options.length);
 
         $options.eq(random).prop('selected', true);
+        $options.change();
     });
 
     $('#emotion_select').change(function (event) {
