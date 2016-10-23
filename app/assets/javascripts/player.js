@@ -5,6 +5,8 @@ $(document).ready(function() {
     var channel = pusher.subscribe('entries');
     channel.bind('emotion_wanted', function(data) {
       $('#emotion').text('show us ' + data.emotion + ' in your face!');
+      $('#capture-btn').attr('disabled', false);
+      $('#capture-btn').text('Face off!');
     });
 
     var startVideo = function(video) {
@@ -62,7 +64,7 @@ $(document).ready(function() {
         contentType: 'application/json',
         data: JSON.stringify(payload),
         success: function() {
-          $('#capture-btn').attr('disabled', false);
+          $('#capture-btn').show();
         }
       });
       event.stopImmediatePropagation();
@@ -99,16 +101,17 @@ $(document).ready(function() {
           photo: photo.src
         }
       };
+      $('#capture-btn').text('Sending...');
       $.ajax({
         method: 'POST',
         url: '/entries',
         contentType: 'application/json',
         data: JSON.stringify(payload),
         success: function () {
-          $('#success-alert').show();
+          $('#capture-btn').text('Get ready!');
           $('#photo').hide();
           $('#video').show();
-          $('#capture-btn').attr('disabled', false);
+          $('#capture-btn').attr('disabled', true);
         },
         error: function () {
           $('#error-alert').show();
