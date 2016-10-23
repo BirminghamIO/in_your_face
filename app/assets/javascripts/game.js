@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
 
     $('#emotion_select').change(function (event) {
-        $this = $(this);
+        var $this = $(this);
         if ($this.val() !== '0') {
             var payload = {
                 game: {
