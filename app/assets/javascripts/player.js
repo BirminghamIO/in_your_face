@@ -121,6 +121,6 @@ $(document).ready(function() {
     };
 
   } else {
-    alert('Sorry, you need modern web browser to play this game. I hear edge is OK');
+    alert('Sorry, you need Chrome or Firefox to play!');
   }
 });
