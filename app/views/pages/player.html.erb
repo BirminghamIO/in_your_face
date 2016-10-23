@@ -14,7 +14,16 @@
           <p class="navbar-text"><b>In Your Face!</b></a>
         </nav>
         <main class="container">
-          <div id="emotion" class="alert alert-warning">Give me emotion!</div>
+          <div class="row">
+            <div class="btn-group btn-group-justified" role="group">
+              <div class="btn-group" role="group">
+                <button id="stop-camera" class="btn btn-danger">Stop Camera</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button id="start-camera" class="btn btn-success">Start Camera</button>
+              </div>
+            </div>
+          </div>
           <div id="success-alert" class="alert alert-success" style="display: none">Sent!</div>
           <div id="error-alert" class="alert alert-danger" style="display: none">Oopsy, try again!</div>
           <video id="video" autoplay></video>

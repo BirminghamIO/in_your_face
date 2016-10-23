@@ -3,29 +3,50 @@ $(document).ready(function() {
 
     // Subscribe to the entries channel
     var channel = pusher.subscribe('entries');
-
-    // Configure user media
-    var gumPromise = navigator.mediaDevices.getUserMedia({
-      video: {
-        width: {
-          ideal: 320
-        },
-        height: {
-          ideal: 320
-        },
-        facingMode: 'user'
-      }
+    channel.bind('emotion_wanted', function(data) {
+       // TODO: react to this
+      console.log(data.emotion);
     });
 
-    // Start streaming the video
-    gumPromise.then(function(mediaStream) {
-      var video = document.querySelector('video');
-      video.srcObject = mediaStream;
-      video.onloadedmetadata = function() {
-        video.play();
-      };
-    }).catch(function(err) {
-      alert(err);
+    var startVideo = function(video) {
+      // Configure user media
+      var gumPromise = navigator.mediaDevices.getUserMedia({
+        video: {
+          width: {
+            ideal: 320
+          },
+          height: {
+            ideal: 320
+          },
+          facingMode: 'user'
+        }
+      });
+      // Start streaming the video
+      gumPromise.then(function(mediaStream) {
+        video = document.querySelector('video');
+        video.srcObject = mediaStream;
+        video.onloadedmetadata = function() {
+          video.play();
+        };
+      }).catch(function(err) {
+        alert(err);
+      });
+    };
+
+    var stopVideo = function(video) {
+      video.srcObject.getTracks()[0].stop();
+    };
+
+    $('#start-camera').click(function(event) {
+      startVideo(document.querySelector('video'));
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    });
+
+    $('#stop-camera').click(function(event) {
+      stopVideo(document.querySelector('video'));
+      event.stopImmediatePropagation();
+      event.preventDefault();
     });
 
     // Enter the player using their twitter handle when we get it
