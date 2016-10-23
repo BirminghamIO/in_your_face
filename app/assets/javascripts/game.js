@@ -21,6 +21,14 @@ $(document).ready(function () {
         }
     });
 
+    channel.bind('random_emotion_requested', function (data) {
+        var $options = $('#emotion_select').find('option'),
+            random = ~~(Math.random() * $options.length);
+
+        $options.eq(random).prop('selected', true);
+        $options.change();
+    });
+
     $('#emotion_select').change(function (event) {
         var $this = $(this);
         if ($this.val() !== '0') {
